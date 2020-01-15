@@ -40,6 +40,7 @@ void algorithm_A(Board board, Player player, int index[]){
     int row_tmp, col_tmp;
     int color = player.get_color();
 
+    //put "orbs" on four cells in corner
     if(board.get_cell_color(0, 0) == 'w'){
         index[0] = 0;
         index[1] = 0;
@@ -56,6 +57,7 @@ void algorithm_A(Board board, Player player, int index[]){
         index[0] = 0;
         index[1] = 5;
     }
+    //four corner explode or not
     else if(board.get_cell_color(0,0)==color && ((board.get_cell_color(0,1)!=color && board.get_orbs_num(0,1)==2) || (board.get_cell_color(1,0)!=color && board.get_orbs_num(1,0)==2))){
         index[0] = 0;
         index[1] = 0;
@@ -74,11 +76,11 @@ void algorithm_A(Board board, Player player, int index[]){
     }
     else{
         //avoid "null"
-        while(1){
+        /*while(1){
             row = rand() % 5;
             col = rand() % 6;
             if(board.get_cell_color(row, col) == color || board.get_cell_color(row, col) == 'w') break;
-        }
+        }*/
 
         //put "orbs" around diagonal
         for(int k=0;k<ROW;k++){
@@ -113,6 +115,8 @@ void algorithm_A(Board board, Player player, int index[]){
                 }
             }
         }
+
+        //detect explosion
         bool explode=false;
         for(int i=0;i<ROW;i++){
             for(int j=0;j<COL;j++){
