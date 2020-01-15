@@ -86,8 +86,25 @@ void algorithm_A(Board board, Player player, int index[]){
         }
         int orbLack = board.get_capacity(row,col)-board.get_orbs_num(row,col);
 */
-        for(int i=0;i<ROW;i++){
-            for(int j=0;j<COL;j++){
+
+        for(int k=1;k<ROW;k++){
+            for(int i=k, j=ROW;i<ROW && j>k; i++, j--){
+                if(board.get_cell_color(i,j)==color || board.get_cell_color(i,j)=='w'){
+                    if( (board.get_capacity(i,j)-board.get_orbs_num(i,j))>1 ){
+                        row=i;
+                        row_tmp=i;
+                        col=j;
+                        col_tmp=j;
+                    }
+                    else{
+                        row = row_tmp;
+                        col = col_tmp;
+                    }
+                }
+            }
+        }
+        for(int k=0;k<ROW;k++){
+            for(int i=0, j=k;i<=k &&j>=0;i++, j--){
                 if(board.get_cell_color(i,j)==color || board.get_cell_color(i,j)=='w'){
                     if( (board.get_capacity(i,j)-board.get_orbs_num(i,j))>1 ){
                         row=i;
@@ -111,28 +128,24 @@ void algorithm_A(Board board, Player player, int index[]){
                             row=i;
                             col=j;
                             explode=true;
-                            total_explo++;
                             break;
                         }
                         else if((i+1)<5 && board.get_cell_color(i+1, j)!=color && (board.get_capacity(i+1,j)-board.get_orbs_num(i+1,j))==1){
                             row=i;
                             col=j;
                             explode=true;
-                            total_explo++;
                             break;
                         }
                         else if((j-1)>=0 && board.get_cell_color(i, j-1)!=color && (board.get_capacity(i,j-1)-board.get_orbs_num(i,j-1))==1){
                             row=i;
                             col=j;
                             explode=true;
-                            total_explo++;
                             break;
                         }
                         else if((j+1)<6 && board.get_cell_color(i, j+1)!=color && (board.get_capacity(i,j+1)-board.get_orbs_num(i,j+1))==1){
                             row=i;
                             col=j;
                             explode=true;
-                            total_explo++;
                             break;
                         }
                     }
@@ -144,6 +157,5 @@ void algorithm_A(Board board, Player player, int index[]){
         }
         index[0] = row;
         index[1] = col;
-        cout << total_explo << endl;
     }
 }
