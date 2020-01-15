@@ -40,11 +40,12 @@ void algorithm_A(Board board, Player player, int index[]){
     int row_tmp, col_tmp;
     int color = player.get_color();
 
-    /*while(1){
-        row = rand() % 5;
-        col = rand() % 6;
-        if(board.get_cell_color(row, col) == color || board.get_cell_color(row, col) == 'w') break;
-    }*/
+    while(1){
+        row_tmp = rand() % 5;
+        col_tmp = rand() % 6;
+        if(board.get_cell_color(row_tmp, col_tmp) == color || board.get_cell_color(row_tmp, col_tmp) == 'w') break;
+    }
+
     if(board.get_cell_color(0, 0) == 'w'){
         index[0] = 0;
         index[1] = 0;
@@ -78,15 +79,6 @@ void algorithm_A(Board board, Player player, int index[]){
         index[1] = 5;
     }
     else{
-        /*while(1){
-            row = rand() % 5;
-            col = rand() % 6;
-            if(board.get_cell_color(row, col) == color || board.get_cell_color(row, col) == 'w') break;
-        }
-        int orbLack = board.get_capacity(row,col)-board.get_orbs_num(row,col);
-*/
-
-
         for(int k=0;k<ROW;k++){
             for(int i=0, j=k;i<=k &&j>=0;i++, j--){
                 if(board.get_cell_color(i,j)==color || board.get_cell_color(i,j)=='w'){
