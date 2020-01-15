@@ -24,7 +24,6 @@ using namespace std;
  * 3. The function that return the color fo the cell(row, col)
  * 4. The function that print out the current board statement
 *************************************************************************/
-int total_explo=0;
 
 
 void algorithm_A(Board board, Player player, int index[]){
@@ -87,8 +86,9 @@ void algorithm_A(Board board, Player player, int index[]){
         int orbLack = board.get_capacity(row,col)-board.get_orbs_num(row,col);
 */
 
-        for(int k=1;k<ROW;k++){
-            for(int i=k, j=ROW;i<ROW && j>k; i++, j--){
+
+        for(int k=0;k<ROW;k++){
+            for(int i=0, j=k;i<=k &&j>=0;i++, j--){
                 if(board.get_cell_color(i,j)==color || board.get_cell_color(i,j)=='w'){
                     if( (board.get_capacity(i,j)-board.get_orbs_num(i,j))>1 ){
                         row=i;
@@ -103,8 +103,8 @@ void algorithm_A(Board board, Player player, int index[]){
                 }
             }
         }
-        for(int k=0;k<ROW;k++){
-            for(int i=0, j=k;i<=k &&j>=0;i++, j--){
+        for(int k=1;k<ROW;k++){
+            for(int i=k, j=ROW;i<ROW && j>k; i++, j--){
                 if(board.get_cell_color(i,j)==color || board.get_cell_color(i,j)=='w'){
                     if( (board.get_capacity(i,j)-board.get_orbs_num(i,j))>1 ){
                         row=i;
